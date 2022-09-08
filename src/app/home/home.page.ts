@@ -17,23 +17,14 @@ export class HomePage {
 
 
   async startScan() {
-    console.log("flag0");
-
     BarcodeScanner.hideBackground(); // make background of WebView transparent
-    console.log("flag1");
-  
-    document.body.classList.add("qrscanner"); // add the qrscanner class to body
-
+    await BarcodeScanner.checkPermission({ force: true }); // check camera permission
+    document.body.classList.add("qrscanner"); // add the qrscanner class to body to hide ionic specific backgrounds
     const result = await BarcodeScanner.startScan(); // start scanning and wait for a result
-    document.body.classList.remove("qrscanner"); // remove the qrscanner from the body
-
-    console.log("flag2");
+    document.body.classList.remove("qrscanner"); // remove the qrscanner from the body to unhide ionic specific backgrounds
 
     // if the result has content
-    console.log("flag3");
-
     if (result.hasContent) {
-      console.log("flag4");
       console.log(result.content); // log the raw scanned content
     }
   };
