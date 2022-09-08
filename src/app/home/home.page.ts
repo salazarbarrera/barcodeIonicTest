@@ -20,7 +20,11 @@ export class HomePage {
     BarcodeScanner.hideBackground(); // make background of WebView transparent
     await BarcodeScanner.checkPermission({ force: true }); // check camera permission
     document.body.classList.add("qrscanner"); // add the qrscanner class to body to hide ionic specific backgrounds
+    BarcodeScanner.enableTorch();
+    console.log(BarcodeScanner.getTorchState());
     const result = await BarcodeScanner.startScan(); // start scanning and wait for a result
+    console.log(BarcodeScanner.getTorchState());
+    BarcodeScanner.enableTorch();
     document.body.classList.remove("qrscanner"); // remove the qrscanner from the body to unhide ionic specific backgrounds
 
     // if the result has content
